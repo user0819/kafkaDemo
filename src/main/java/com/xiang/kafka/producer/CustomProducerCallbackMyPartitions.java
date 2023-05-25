@@ -1,4 +1,4 @@
-package com.xiang.kafka;
+package com.xiang.kafka.producer;
 
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
@@ -9,8 +9,9 @@ import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.util.Properties;
 
-public class CustomProducerCallback {
-     private final static String SERVER_CONFIG = "localhost:9092";
+public class CustomProducerCallbackMyPartitions {
+
+    private final static String SERVER_CONFIG = "10.21.41.158:9092";
 
     public static void main(String[] args) {
         // 1. 创建 kafka 生产者的配置对象
@@ -21,6 +22,9 @@ public class CustomProducerCallback {
         // key,value 序列化（必须）：key.serializer，value.serializer
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+
+        //自定义partition
+        properties.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, MyPartitioner.class.getName());
 
         // 3. 创建 kafka 生产者对象
         KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(properties);
