@@ -10,7 +10,7 @@ import org.apache.kafka.common.serialization.StringSerializer;
 import java.util.Properties;
 
 public class CustomProducerCallbackPartitions {
-    private final static String SERVER_CONFIG = "10.21.41.158:9092";
+    private final static String SERVER_CONFIG = "localhost:9092";
 
     public static void main(String[] args) {
         // 1. 创建 kafka 生产者的配置对象
